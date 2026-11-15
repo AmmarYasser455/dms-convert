@@ -1,0 +1,113 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          2.294444,
+          48.858333
+        ]
+      },
+      "properties": {
+        "name": "Eiffel Tower",
+        "input": "48°51'30\"N 2°17'40\"E",
+        "dms": "48°51'30\"N 2°17'40\"E",
+        "lat": 48.858333,
+        "lon": 2.294444,
+        "km_from_giza": 3212.8
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -74.044444,
+          40.689167
+        ]
+      },
+      "properties": {
+        "name": "Statue of Liberty",
+        "input": "40 41 21 N, 74 2 40 W",
+        "dms": "40°41'21\"N 74°02'40\"W",
+        "lat": 40.689167,
+        "lon": -74.044444,
+        "km_from_giza": 9023.8
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          151.2153,
+          -33.8569
+        ]
+      },
+      "properties": {
+        "name": "Sydney Opera House",
+        "input": "-33.8569, 151.2153",
+        "dms": "33°51'25\"S 151°12'55\"E",
+        "lat": -33.8569,
+        "lon": 151.2153,
+        "km_from_giza": 14423.3
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -43.2105,
+          -22.9525
+        ]
+      },
+      "properties": {
+        "name": "Christ the Redeemer",
+        "input": "S 22°57.15' W 43°12.63'",
+        "dms": "22°57'09\"S 43°12'38\"W",
+        "lat": -22.9525,
+        "lon": -43.2105,
+        "km_from_giza": 9877.7
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          31.134167,
+          29.979167
+        ]
+      },
+      "properties": {
+        "name": "Great Pyramid of Giza",
+        "input": "29d58m45sN 31d8m3sE",
+        "dms": "29°58'45\"N 31°08'03\"E",
+        "lat": 29.979167,
+        "lon": 31.134167,
+        "km_from_giza": 0.0
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          78.0421,
+          27.1751
+        ]
+      },
+      "properties": {
+        "name": "Taj Mahal",
+        "input": "E 78.0421 N 27.1751",
+        "dms": "27°10'30\"N 78°02'32\"E",
+        "lat": 27.1751,
+        "lon": 78.0421,
+        "km_from_giza": 4559.5
+      }
+    }
+  ]
+}
