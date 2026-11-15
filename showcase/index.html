@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>dms-convert showcase: six landmarks, six coordinate formats</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+<style>
+body { margin: 0; font-family: sans-serif; }
+header { padding: 8px 14px; }
+h1 { font-size: 1.2em; margin: 0 0 4px; }
+p { margin: 2px 0; font-size: 0.9em; }
+#map { height: calc(100vh - 110px); }
+</style>
+</head>
+<body>
+<header>
+<h1>Six landmarks, six coordinate formats, one map</h1>
+<p>Each position was written as text in a different style and parsed with dms-convert; popups show the original text and the distance from the Great Pyramid of Giza.</p>
+<p>Distances are great-circle, in km. Data: Wikidata (CC0). <a href="https://github.com/AmmarYasser455/dms-convert">dms-convert on GitHub</a></p>
+</header>
+<div id="map"></div>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script>
+var map = L.map('map');
+L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+  maxZoom: 19,
+  attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+}).addTo(map);
+function esc(s) { return String(s).replace(/[&<>"]/g, function (c) {
+  return {'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;'}[c]; }); }
+fetch('map.geojson').then(function (r) { return r.json(); }).then(function (data) {
+  var layer = L.geoJSON(data, {
+    pointToLayer: function (f, ll) {
+      var ref = f.properties.km_from_giza === 0;
+      return L.circleMarker(ll, {radius: ref ? 9 : 6, color: ref ? '#c0392b' : '#1f5f99',
+                                 fillOpacity: 0.8});
+    },
+    onEachFeature: function (f, l) {
+      var p = f.properties;
+      l.bindPopup('<b>' + esc(p.name) + '</b><br>input: ' + esc(p.input) +
+        '<br>DMS: ' + esc(p.dms) + '<br>lat, lon: ' + p.lat + ', ' + p.lon +
+        '<br>' + p.km_from_giza + ' km from Giza');
+    }
+  }).addTo(map);
+  map.fitBounds(layer.getBounds().pad(0.1));
+});
+</script>
+</body>
+</html>

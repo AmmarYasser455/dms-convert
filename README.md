@@ -71,6 +71,12 @@ The test suite regenerates the layer and compares it with the checked-in file, a
 
 Data source and license: the six positions are the coordinates of each landmark's Wikidata item (property P625, "coordinate location"; Wikidata structured data is CC0 1.0), entered by hand and rounded to about 1e-4°, then written in the different text styles of `landmarks.csv`. They were not re-downloaded or re-verified by the test suite, so they are approximate, not survey-grade. The independent reference values in `tests/test_examples.py` come from the same source rounded to 1e-3°. The CSV, GeoJSON and notebook are distributed under the repository's MIT license.
 
+## Showcase
+
+![map](showcase/map.png)
+
+Six landmarks written in six coordinate styles, parsed and measured from the Great Pyramid of Giza. See [showcase/](showcase/) for the report, web map, notebook and GeoJSON; rebuild with `python showcase/make_showcase.py`.
+
 ## Accepted input
 
 - Units: `°`, `'`, `"`, `′`, `″`, `d m s`, `deg min sec`, or plain spaces/tabs/colons. An explicit unit is honoured (`46"` is 46 seconds, `40°30"` is 40°00'30"); unmarked numbers take the next unit after the previous one. Units must be in degree, minute, second order.
