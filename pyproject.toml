@@ -1,0 +1,26 @@
+[build-system]
+requires = ["setuptools>=77"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "dms-convert"
+version = "0.1.0"
+description = "Parse and convert coordinates between decimal degrees, DMS and degrees-decimal-minutes."
+readme = "README.md"
+license = "MIT"
+license-files = ["LICENSE"]
+requires-python = ">=3.10"
+dependencies = []
+classifiers = ["Topic :: Scientific/Engineering :: GIS"]
+
+[project.optional-dependencies]
+test = ["pytest"]
+
+[project.scripts]
+dms-convert = "dms_convert.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
