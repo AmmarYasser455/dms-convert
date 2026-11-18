@@ -71,6 +71,10 @@ The test suite regenerates the layer and compares it with the checked-in file, a
 
 Data source and license: the six positions are the coordinates of each landmark's Wikidata item (property P625, "coordinate location"; Wikidata structured data is CC0 1.0), entered by hand and rounded to about 1e-4°, then written in the different text styles of `landmarks.csv`. They were not re-downloaded or re-verified by the test suite, so they are approximate, not survey-grade. The independent reference values in `tests/test_examples.py` come from the same source rounded to 1e-3°. The CSV, GeoJSON and notebook are distributed under the repository's MIT license.
 
+Try the notebook in Colab (badge below) or view the [demo map](https://ammaryasser455.github.io/dms-convert/) (`docs/demo.geojson`, kept equal to the tool's output by a test). See `examples/README.md` for data sources.
+
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/AmmarYasser455/dms-convert/blob/main/examples/demo.ipynb)
+
 ## Showcase
 
 ![map](showcase/map.png)

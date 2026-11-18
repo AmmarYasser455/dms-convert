@@ -26,17 +26,13 @@ def test_checked_in_geojson_matches_tool_output():
         assert json.load(fh) == build(EXAMPLES / "landmarks.csv")
 
 
-def test_demo_notebook_executes_and_prints_expected_output(capsys):
-    nb = json.loads((EXAMPLES / "demo.ipynb").read_text(encoding="utf-8"))
-    scope: dict = {}
-    for cell in nb["cells"]:
-        if cell["cell_type"] == "code":
-            exec("".join(cell["source"]), scope)  # the repository's own notebook
-    assert capsys.readouterr().out.splitlines() == [
-        "40.4461 -79.9822",
-        "40°26.7667'N 79°58.9333'W",
-        "40°26'46\"N 79°58'56\"W",
-    ]
+def test_docs_demo_geojson_is_current():
+    docs = EXAMPLES.parent / "docs"
+    committed = json.loads((docs / "demo.geojson").read_text(encoding="utf-8"))
+    assert committed == build(EXAMPLES / "landmarks.csv")
+    html = (docs / "index.html").read_text(encoding="utf-8")
+    assert "leaflet@1.9.4/dist/leaflet.js" in html and "demo.geojson" in html
+    assert "github.com/AmmarYasser455/dms-convert" in html
 
 
 def test_demo_points_are_lon_lat_at_known_places():
