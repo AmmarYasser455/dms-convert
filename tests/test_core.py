@@ -249,3 +249,43 @@ def test_mixed_hemisphere_placement(text):
 def test_mixed_hemisphere_placement_rejected(text):
     with pytest.raises(ValueError):
         parse_coordinate(text)
+
+
+def test_format_extremes_poles_and_antimeridian():
+    assert format_coordinate(90, 180, "dms") == '90°00\'00.00"N 180°00\'00.00"E'
+    assert format_coordinate(-90, -180, "ddm") == "90°00.0000'S 180°00.0000'W"
+
+
+@pytest.mark.parametrize("text, expected", [
+    ("90N, 180E", (90.0, 180.0)),                                   # DD
+    ("90S, 180W", (-90.0, -180.0)),
+    ('90°00\'00.00"N 180°00\'00.00"E', (90.0, 180.0)),            # DMS
+    ('90°00\'00"S 180°00\'00"W', (-90.0, -180.0)),
+    ("90°00.0000'N 180°00.0000'E", (90.0, 180.0)),                # DDM
+    ("90°00.0000'S 180°00.0000'W", (-90.0, -180.0)),
+])
+def test_parse_extremes_accepted(text, expected):
+    assert parse_coordinate(text) == expected
+
+
+@pytest.mark.parametrize("text", [
+    "90.0001 N 0 E", "90.0001 S 0 E", "0 N 180.0001 E", "0 N 180.0001 W",          # DD
+    '90°00\'01"N 0E', '90°00\'01"S 0E', '0N 180°00\'01"E', '0N 180°00\'01"W',      # DMS
+    "90°00.01'N 0E", "90°00.01'S 0E", "0N 180°00.01'E", "0N 180°00.01'W",          # DDM
+])
+def test_parse_just_past_extremes_rejected(text):
+    with pytest.raises(ValueError, match="out of range"):
+        parse_coordinate(text)
+
+
+@pytest.mark.parametrize("fn, value, axis, expected", [
+    (to_dms, 40.99999999, "lat", '41°00\'00.00"N'),      # seconds carry into minutes and degrees
+    (to_dms, 179.99999999, "lon", '180°00\'00.00"E'),
+    (to_ddm, -33.99999999, "lat", "34°00.0000'S"),
+    (to_dd, 59.9999999, "lat", "60.000000°N"),
+    (to_dms, -0.0000001, "lon", '0°00\'00.00"E'),        # rounds to zero: no minus hemisphere
+    (to_ddm, -0.0000001, "lat", "0°00.0000'N"),
+    (to_dd, -0.0000001, "lat", "0.000000°N"),
+])
+def test_rounding_carry_and_negative_zero(fn, value, axis, expected):
+    assert fn(value, axis) == expected
