@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="assets/brand/logo.png" alt="dms-convert logo" width="112">
+</p>
+
 # dms-convert
 
 Parse and convert coordinates between decimal degrees (DD), degrees-minutes-seconds (DMS) and degrees-decimal-minutes (DDM), with tolerant parsing of messy real-world input.
