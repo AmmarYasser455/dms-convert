@@ -92,7 +92,7 @@ Six landmarks written in six coordinate styles, parsed and measured from the Gre
 
 - Units: `°`, `'`, `"`, `′`, `″`, `d m s`, `deg min sec`, or plain spaces/tabs/colons. An explicit unit is honoured (`46"` is 46 seconds, `40°30"` is 40°00'30"); unmarked numbers take the next unit after the previous one. Units must be in degree, minute, second order.
 - Hemisphere letters `N S E W` before or after each part, mixed placement included (`N 40.7 74.0 W`, `40.7 N W 74.0`); with letters, longitude may come first. Without a separator, a prefix-plus-suffix pair must make the split clear: two plain numbers, or degree marks (`N 40°42' 74°0' W`).
-- Signed values (`-79.98`) instead of letters. Without letters the order is lat, lon.
+- Signed values (`-79.98`, also with a typographic minus `−79.98`, U+2212, or hyphen U+2010) instead of letters. Without letters the order is lat, lon.
 - Separators: comma, semicolon, slash, `|`, or whitespace.
 - Rejected: latitude beyond ±90, longitude beyond ±180, minutes or seconds of 60 or more (also when they come first, e.g. `60'` or `3600"`), a sign combined with a hemisphere letter, two values on the same axis.
 

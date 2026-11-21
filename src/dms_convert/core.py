@@ -13,6 +13,8 @@ _UNIT_WORDS = {
     **dict.fromkeys(["m", "min", "mins", "minute", "minutes"], _MIN),
     **dict.fromkeys(["sec", "secs", "second", "seconds"], _SEC),
 }
+# Typographic minus signs (U+2212 and the Unicode hyphen U+2010) read as ASCII "-".
+_MINUS = str.maketrans({"−": "-", "‐": "-"})
 _TOKEN = re.compile(
     r"(?P<num>[-+]?(?:[0-9]+(?:\.[0-9]*)?|\.[0-9]+))"
     r"|(?P<sec>″|''|’’|′′|\"|”|“)"
@@ -34,6 +36,7 @@ def _tokenize(text: str) -> list[tuple[str, object]]:
     """
     if not isinstance(text, str):
         raise TypeError(f"expected a string, got {type(text).__name__}")
+    text = text.translate(_MINUS)
     tokens: list[tuple[str, object]] = []
     last_unit = None  # last explicit unit since the previous separator/hemisphere
     pos, prev_end_num = 0, -1
@@ -242,7 +245,10 @@ def _value(value: object, axis: str) -> float:
     _check_axis(axis)
     if isinstance(value, bool) or not isinstance(value, (int, float)):
         raise TypeError(f"expected a number, got {type(value).__name__}")
-    value = float(value)
+    try:
+        value = float(value)
+    except OverflowError:  # int too large for a float
+        raise ValueError(f"{axis} value {value} out of range (±{_LIMITS[axis]:g})") from None
     if not math.isfinite(value):
         raise ValueError(f"{axis} value must be finite, got {value}")
     _check(value, axis)
