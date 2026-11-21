@@ -7,7 +7,7 @@
 
 # dms-convert
 
-Parse and convert coordinates between decimal degrees (DD), degrees-minutes-seconds (DMS) and degrees-decimal-minutes (DDM), with tolerant parsing of messy real-world input.
+Part of [OpenTerra](https://github.com/AmmarYasser455), a family of open GIS tools. Parse and convert coordinates between decimal degrees (DD), degrees-minutes-seconds (DMS) and degrees-decimal-minutes (DDM), with tolerant parsing of messy real-world input.
 
 Coordinates arrive in many shapes: `40°26'46"N 79°58'56"W` in a report, `40 26.767 N, 79 58.933 W` from a GPS unit, `-79.98, 40.44` in a spreadsheet. This tool reads those variants and writes a consistent format. It has no dependencies.
 
